@@ -17,21 +17,16 @@ object Versions {
     const val kotlin = "1.3.50"
     const val androidPlugin = "3.6.0-beta01"
 
-    const val rxRelay = "2.1.0"
-    const val rxBinding = "3.0.0-alpha2"
-    const val rxKotlin = "2.2.0"
-    const val rxAndroid = "2.0.2"
-
     const val leakCanary = "2.0-alpha-3"
 
-    const val viewModel = "2.1.0"
+    const val viewModel = "2.2.0-rc01"
     const val room = "2.2.1"
 
-    const val klock = "1.4.0"
     const val dagger = "2.25.2"
     const val moshi = "1.9.1"
     const val retrofit = "2.6.2"
     const val timber = "4.7.1"
+    const val chucker = "3.0.1"
 
     const val glide = "4.10.0"
 
@@ -97,6 +92,13 @@ object Dependencies {
         const val moshi = "com.squareup.retrofit2:converter-moshi:${vers.retrofit}"
     }
 
+    val chucker = Chucker
+
+    object Chucker {
+        const val core = "com.github.ChuckerTeam.Chucker:library:${vers.chucker}"
+        const val noop = "com.github.ChuckerTeam.Chucker:library-no-op:${vers.chucker}"
+    }
+
     val room = Room
 
     object Room {
@@ -106,7 +108,7 @@ object Dependencies {
         const val test = "androidx.room:room-compiler:${vers.room}"
     }
 
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc01"
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${vers.viewModel}"
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     const val leakSentry = "com.squareup.leakcanary:leaksentry:${Versions.leakCanary}"
