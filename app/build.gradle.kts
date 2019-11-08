@@ -6,6 +6,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 fun getProperty(fileName: String, prop: String): Any? {
@@ -91,24 +92,26 @@ dependencies {
     arrayOf(
         Dependencies.kotlin,
         Dependencies.material,
-        Dependencies.androidxCore,
-        Dependencies.appcompat,
+        Dependencies.androidX.core,
+        Dependencies.androidX.appcompat,
         Dependencies.moshi.core,
-        Dependencies.constraint,
-        Dependencies.recyclerView,
+        Dependencies.androidX.constraint,
+        Dependencies.androidX.recyclerView,
         Dependencies.retrofit.core,
         Dependencies.retrofit.moshi,
         Dependencies.timber,
         Dependencies.dagger.core,
         Dependencies.room.core,
         Dependencies.room.ktx,
-        Dependencies.viewModel,
-        Dependencies.liveData,
+        Dependencies.androidX.viewModel,
+        Dependencies.androidX.liveData,
+        Dependencies.androidX.navigationCore,
+        Dependencies.androidX.navigationUi,
         Dependencies.epoxy.core,
         Dependencies.leakCanary,
         Dependencies.chucker.core,
-        Dependencies.activity,
-        Dependencies.fragment,
+        Dependencies.androidX.activity,
+        Dependencies.androidX.fragment,
         Dependencies.coroutines.core,
         Dependencies.coroutines.android,
         Dependencies.threeTenAbp,

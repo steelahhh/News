@@ -19,7 +19,7 @@ object Versions {
 
     const val leakCanary = "2.0-alpha-3"
 
-    const val arch = "2.2.0-rc01"
+    const val arch = "2.2.0-rc02"
     const val room = "2.2.1"
 
     const val dagger = "2.25.2"
@@ -32,7 +32,7 @@ object Versions {
 
     const val epoxy = "3.8.0"
 
-    const val mockk = "1.9.3.kotlin12"
+    const val mockk = "1.9.3"
     const val junit = "5.3.1"
     const val testRunner = "1.1.1"
 }
@@ -42,13 +42,7 @@ object Dependencies {
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${vers.kotlin}"
 
-    const val appcompat = "androidx.appcompat:appcompat:1.1.0"
-    const val androidxCore = "androidx.core:core-ktx:1.1.0"
-    const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0-rc01"
     const val material = "com.google.android.material:material:1.2.0-alpha01"
-    const val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
-    const val fragment = "androidx.fragment:fragment-ktx:1.1.0"
-    const val activity = "androidx.activity:activity-ktx:1.0.0"
 
     val dagger = Dagger
 
@@ -108,8 +102,20 @@ object Dependencies {
         const val test = "androidx.room:room-compiler:${vers.room}"
     }
 
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${vers.arch}"
-    const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${vers.arch}"
+    val androidX = AndroidX
+
+    object AndroidX {
+        const val core = "androidx.core:core-ktx:1.1.0"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${vers.arch}"
+        const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${vers.arch}"
+        const val navigationCore = "androidx.navigation:navigation-fragment-ktx:${vers.arch}"
+        const val navigationUi = "androidx.navigation:navigation-ui-ktx:${vers.arch}"
+        const val appcompat = "androidx.appcompat:appcompat:1.1.0"
+        const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0-rc01"
+        const val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
+        const val fragment = "androidx.fragment:fragment-ktx:1.1.0"
+        const val activity = "androidx.activity:activity-ktx:1.0.0"
+    }
 
     const val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:1.2.1"
 
