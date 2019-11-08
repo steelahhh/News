@@ -8,10 +8,12 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import dev.steelahhh.news.R
 import dev.steelahhh.news.core.loaderItem
 import dev.steelahhh.news.di.injector
 import dev.steelahhh.news.di.viewModel
+import dev.steelahhh.news.features.ArticlesListFragmentDirections.Companion.openArticleDetail
 import dev.steelahhh.news.features.ArticlesViewModel.Companion.PAGE_SIZE
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.fragment_article_list.*
@@ -61,6 +63,8 @@ class ArticlesListFragment : Fragment() {
                     id(article.title + article.description)
                     article(article)
                     listener {
+                        val action = openArticleDetail(it.title)
+                        findNavController().navigate(action)
                     }
                     onBind { _, _, position ->
                         if (position == abs(state.articles.size - PAGE_SIZE / 2)) {

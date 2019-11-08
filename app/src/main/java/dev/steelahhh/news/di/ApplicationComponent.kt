@@ -5,6 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dev.steelahhh.news.features.ArticlesViewModel
 import dev.steelahhh.news.features.NewsModule
+import dev.steelahhh.news.features.detail.ArticleDetailViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -16,4 +17,5 @@ interface ApplicationComponent {
     }
 
     val newsListViewModel: ArticlesViewModel
+    val articleDetailViewModel: ArticleDetailViewModel
 }

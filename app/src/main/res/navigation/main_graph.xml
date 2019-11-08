@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_graph"
     app:startDestination="@id/articlesListFragment">
 
     <fragment
         android:id="@+id/articlesListFragment"
         android:name="dev.steelahhh.news.features.ArticlesListFragment"
-        android:label="ArticlesListFragment" />
+        android:label="ArticlesListFragment">
+        <action
+            android:id="@+id/openArticleDetail"
+            app:destination="@id/articleDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="dev.steelahhh.news.features.detail.ArticleDetailFragment"
+        android:label="ArticleDetailFragment">
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

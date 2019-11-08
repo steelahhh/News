@@ -3,10 +3,24 @@
         <item name="colorPrimary">@color/colorBrand</item>
         <item name="colorPrimaryDark">@color/colorBrand</item>
         <item name="colorAccent">@color/colorBrand</item>
+        <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationIcon</item>
     </style>
 
     <style name="AppTheme.Splash">
         <item name="android:statusBarColor">@color/colorBrand</item>
         <item name="android:windowBackground">@color/colorBrand</item>
     </style>
+
+    <style name="ToolbarTitleStyle" parent="AppTheme">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ToolbarTitleStyle.Expanded">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="ToolbarNavigationIcon" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="tint">@color/white</item>
+    </style>
+
 </resources>

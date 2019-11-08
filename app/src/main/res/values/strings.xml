@@ -3,4 +3,5 @@
     <string name="article_image_content_description">article image</string>
     <string name="error_loading_articles">Error loading articles</string>
     <string name="action_retry">Retry</string>
+    <string name="open_in_browser">Open source in browser</string>
 </resources>

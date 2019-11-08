@@ -6,16 +6,17 @@ import androidx.lifecycle.viewModelScope
 import dev.steelahhh.news.core.Failure
 import dev.steelahhh.news.domain.Article
 import dev.steelahhh.news.domain.NewsRepository
-import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class ArticlesViewModel @Inject constructor(
     private val repository: NewsRepository
 ) : ViewModel() {
 
-    val news: MutableLiveData<ArticlesListState> = MutableLiveData()
+    val news get() = _news
+    private val _news: MutableLiveData<ArticlesListState> = MutableLiveData()
 
     private var currentPage = 1
 
