@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -26,6 +27,18 @@ class ArticlesListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_article_list, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val searchView = (toolbar.menu.findItem(R.id.btn_search_view).actionView as SearchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.run(vm::onNewQuery)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean = false
+        })
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -51,6 +64,7 @@ class ArticlesListFragment : Fragment() {
     private fun renderLoading() {
         errorView.isGone = true
         progressBar.isVisible = true
+        recycler.isGone = true
     }
 
     private fun renderContent(state: ArticlesListState) {

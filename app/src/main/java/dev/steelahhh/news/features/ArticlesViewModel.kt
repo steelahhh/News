@@ -6,37 +6,44 @@ import androidx.lifecycle.viewModelScope
 import dev.steelahhh.news.core.Failure
 import dev.steelahhh.news.domain.Article
 import dev.steelahhh.news.domain.NewsRepository
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class ArticlesViewModel @Inject constructor(
     private val repository: NewsRepository
 ) : ViewModel() {
 
     val news get() = _news
-    private val _news: MutableLiveData<ArticlesListState> = MutableLiveData()
+
+    private val _news = MutableLiveData<ArticlesListState>()
+    private val _query = MutableLiveData<String>("bitcoin")
 
     private var currentPage = 1
 
-    private var query: String = "bitcoin"
+    private val currentQuery get() = _query.value.orEmpty()
 
     init {
         viewModelScope.launch { repository.clear() }
         news.value = ArticlesListState(isLoading = true)
-        loadNews(currentPage, query)
+        loadNews(currentPage, currentQuery)
+    }
+
+    fun onNewQuery(newQuery: String) {
+        _query.value = newQuery
+        refresh()
     }
 
     fun loadMore() {
         currentPage++
-        loadNews(currentPage, query)
+        loadNews(currentPage, currentQuery)
     }
 
     fun refresh() {
         currentPage = 1
-        news.value = ArticlesListState(isLoading = true)
-        loadNews(currentPage, query)
+        news.value = ArticlesListState(isLoading = true, articles = emptyList())
+        loadNews(currentPage, currentQuery)
     }
 
     @Suppress("UNUSED_PARAMETER")
