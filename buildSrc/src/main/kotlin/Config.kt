@@ -15,7 +15,7 @@ object Versions {
     const val appVersionName = "1.0.0"
 
     const val kotlin = "1.3.50"
-    const val androidPlugin = "3.6.0-beta01"
+    const val androidPlugin = "3.6.0-beta02"
 
     const val leakCanary = "2.0-alpha-3"
 
