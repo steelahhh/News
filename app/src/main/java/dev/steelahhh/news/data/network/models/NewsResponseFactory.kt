@@ -13,6 +13,9 @@ import dev.steelahhh.news.data.network.models.ApiResponse.ErrorResponse
 import dev.steelahhh.news.data.network.models.ApiResponse.SuccessResponse
 import java.lang.reflect.Type
 
+/**
+ * Transform all the possible responses from NewsApi to a [ApiResponse]
+ */
 class NewsResponseFactory : Factory {
     override fun create(
         type: Type,
@@ -34,8 +37,10 @@ class NewsResponseFactory : Factory {
             val status = value["status"] as? String
                 ?: throw JsonDataException("Invalid status received")
             return when (status) {
+                // if response is ok, just decode from json
                 "ok" -> moshi.adapter(SuccessResponse::class.java).fromJsonValue(json)
                 "error" -> {
+                    // if error, try to find a code that matches the response
                     val errorResponseClass = value["code"]?.let {
                         moshi.adapter(ErrorCode::class.java).fromJson("\"${it as String}\"")
                     }?.derivedClass?.java ?: throw JsonDataException("No error code received")

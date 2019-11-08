@@ -2,11 +2,11 @@ package dev.steelahhh.news.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import dev.steelahhh.news.data.entities.NewsEntity
+import dev.steelahhh.news.data.entities.ArticleEntity
 
 @Database(
     entities = [
-        NewsEntity::class
+        ArticleEntity::class
     ],
     version = 1,
     exportSchema = true

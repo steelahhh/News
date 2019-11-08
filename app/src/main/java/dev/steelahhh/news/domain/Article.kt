@@ -1,9 +1,12 @@
 package dev.steelahhh.news.domain
 
-import dev.steelahhh.news.data.entities.NewsEntity
+import dev.steelahhh.news.data.entities.ArticleEntity
 import dev.steelahhh.news.data.network.models.ArticleResponse
 import org.threeten.bp.Instant
 
+/**
+ * Domain level object that represents a single article
+ */
 data class Article(
     val source: String,
     val title: String,
@@ -15,6 +18,9 @@ data class Article(
     val content: String
 )
 
+/**
+ * Convert article response to a domain object
+ */
 fun ArticleResponse.toDomain() = Article(
     title = title,
     author = author.orEmpty(),
@@ -26,7 +32,10 @@ fun ArticleResponse.toDomain() = Article(
     date = publishedAt
 )
 
-fun Article.toDb() = NewsEntity(
+/**
+ * Convert article from domain into db entity
+ */
+fun Article.toDb() = ArticleEntity(
     source = source,
     author = author,
     title = title,
@@ -37,7 +46,10 @@ fun Article.toDb() = NewsEntity(
     content = content
 )
 
-fun NewsEntity.toDomain() = Article(
+/**
+ * Convert article from db entity into domain
+ */
+fun ArticleEntity.toDomain() = Article(
     title = title,
     author = author,
     description = description,

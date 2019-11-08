@@ -4,6 +4,9 @@ import dev.steelahhh.news.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/**
+ * Appends the apiKey to every request
+ */
 object ApiKeyInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()

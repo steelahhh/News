@@ -7,6 +7,9 @@ import java.io.IOException
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
 
+/**
+ * Moshi Converter that transforms Instant to String and back
+ */
 class InstantAdapter : JsonAdapter<Instant>() {
 
     @Throws(IOException::class)

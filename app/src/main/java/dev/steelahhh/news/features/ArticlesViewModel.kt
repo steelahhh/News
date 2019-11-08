@@ -21,10 +21,10 @@ class ArticlesViewModel @Inject constructor(
     private val _query = MutableLiveData<String>("bitcoin")
 
     private var currentPage = 1
-
     private val currentQuery get() = _query.value.orEmpty()
 
     init {
+        // Clear the loaded articles to keep the data up-to-date
         viewModelScope.launch { repository.clear() }
         news.value = ArticlesListState(isLoading = true)
         loadNews(currentPage, currentQuery)

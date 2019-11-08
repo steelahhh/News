@@ -44,8 +44,6 @@ class NewsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getNewsById(id: Int): Article = dao.getById(id).toDomain()
-
     override suspend fun getNewsByTitle(title: String): Article = dao.getByTitle(title).toDomain()
 
     override suspend fun clear() = dao.clear()

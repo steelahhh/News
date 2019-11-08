@@ -16,11 +16,15 @@ import dev.steelahhh.news.di.injector
 import dev.steelahhh.news.di.viewModel
 import dev.steelahhh.news.features.ArticlesListFragmentDirections.Companion.openArticleDetail
 import dev.steelahhh.news.features.ArticlesViewModel.Companion.PAGE_SIZE
-import kotlin.math.abs
 import kotlinx.android.synthetic.main.fragment_article_list.*
+import kotlin.math.abs
 
 class ArticlesListFragment : Fragment() {
     private val vm by viewModel { injector.newsListViewModel }
+
+    private val searchView by lazy {
+        (toolbar.menu.findItem(R.id.btn_search_view).actionView as SearchView)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,16 +32,18 @@ class ArticlesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_article_list, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val searchView = (toolbar.menu.findItem(R.id.btn_search_view).actionView as SearchView)
+    override fun onResume() {
+        super.onResume()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.run(vm::onNewQuery)
-                return true
-            }
-
             override fun onQueryTextChange(newText: String?): Boolean = false
-        })
+            override fun onQueryTextSubmit(query: String?): Boolean = true.also {
+                query?.run(vm::onNewQuery)
+            }
+        })}
+
+    override fun onPause() {
+        super.onPause()
+        searchView.setOnQueryTextListener(null)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -77,8 +83,7 @@ class ArticlesListFragment : Fragment() {
                     id(article.title + article.description)
                     article(article)
                     listener {
-                        val action = openArticleDetail(it.title)
-                        findNavController().navigate(action)
+                        findNavController().navigate(openArticleDetail(it.title))
                     }
                     onBind { _, _, position ->
                         if (position == abs(state.articles.size - PAGE_SIZE / 2)) {
