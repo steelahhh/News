@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import dev.steelahhh.news.features.NewsModule
-import dev.steelahhh.news.features.NewsViewModel
+import dev.steelahhh.news.features.ArticlesViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -15,5 +15,5 @@ interface ApplicationComponent {
         fun create(@BindsInstance applicationContext: Context): ApplicationComponent
     }
 
-    val newsListViewModel: NewsViewModel
+    val newsListViewModel: ArticlesViewModel
 }

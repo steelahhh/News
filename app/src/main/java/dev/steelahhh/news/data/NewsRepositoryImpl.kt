@@ -8,6 +8,7 @@ import dev.steelahhh.news.data.network.models.ApiResponse.ErrorResponse
 import dev.steelahhh.news.data.network.models.ApiResponse.SuccessResponse
 import dev.steelahhh.news.domain.Article
 import dev.steelahhh.news.domain.NewsRepository
+import dev.steelahhh.news.domain.toDb
 import dev.steelahhh.news.domain.toDomain
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -28,7 +29,11 @@ class NewsRepositoryImpl @Inject constructor(
                 pageSize = pageSize
             )
             when (response) {
-                is SuccessResponse -> Either.Right(response.articles.map { it.toDomain() })
+                is SuccessResponse -> {
+                    val articles = response.articles.map { it.toDomain() }
+                    dao.putNews(articles.map { it.toDb() })
+                    Either.Right(articles)
+                }
                 is ErrorResponse -> Either.Left(Failure.FeatureFailure(response.code))
             }
         } catch (exception: Exception) {
@@ -38,4 +43,10 @@ class NewsRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun getNewsById(id: Int): Article = dao.getById(id).toDomain()
+
+    override suspend fun getNewsByTitle(title: String): Article = dao.getByTitle(title).toDomain()
+
+    override suspend fun clear() = dao.clear()
 }

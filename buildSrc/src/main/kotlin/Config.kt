@@ -19,7 +19,7 @@ object Versions {
 
     const val leakCanary = "2.0-alpha-3"
 
-    const val viewModel = "2.2.0-rc01"
+    const val arch = "2.2.0-rc01"
     const val room = "2.2.1"
 
     const val dagger = "2.25.2"
@@ -108,7 +108,10 @@ object Dependencies {
         const val test = "androidx.room:room-compiler:${vers.room}"
     }
 
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${vers.viewModel}"
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${vers.arch}"
+    const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${vers.arch}"
+
+    const val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:1.2.1"
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     const val leakSentry = "com.squareup.leakcanary:leaksentry:${Versions.leakCanary}"

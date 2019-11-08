@@ -52,6 +52,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -79,6 +82,9 @@ android {
 kapt {
     useBuildCache = true
     correctErrorTypes = true
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -97,6 +103,7 @@ dependencies {
         Dependencies.room.core,
         Dependencies.room.ktx,
         Dependencies.viewModel,
+        Dependencies.liveData,
         Dependencies.epoxy.core,
         Dependencies.leakCanary,
         Dependencies.chucker.core,
@@ -104,6 +111,7 @@ dependencies {
         Dependencies.fragment,
         Dependencies.coroutines.core,
         Dependencies.coroutines.android,
+        Dependencies.threeTenAbp,
         Dependencies.glide.core
     ).forEach { dependency ->
         implementation(dependency)

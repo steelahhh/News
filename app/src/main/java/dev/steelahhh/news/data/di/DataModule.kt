@@ -7,6 +7,7 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import dev.steelahhh.news.core.InstantAdapter
 import dev.steelahhh.news.data.db.NewsDao
 import dev.steelahhh.news.data.db.NewsDatabase
 import dev.steelahhh.news.data.network.ApiKeyInterceptor
@@ -15,6 +16,7 @@ import dev.steelahhh.news.data.network.models.NewsResponseFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import okhttp3.OkHttpClient
+import org.threeten.bp.Instant
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -32,6 +34,7 @@ object DataModule {
     @Singleton
     fun provideMoshi(): Moshi = Moshi.Builder()
         .add(NewsResponseFactory())
+        .add(Instant::class.java, InstantAdapter())
         .build()
 
     @Provides
