@@ -32,6 +32,15 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     defaultConfig {
         applicationId = ApplicationID.default
         minSdkVersion(Versions.minSdk)
@@ -49,15 +58,6 @@ android {
     lintOptions {
         error("VisibleForTests")
     }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -68,10 +68,11 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
         getByName("debug") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
@@ -118,7 +119,6 @@ dependencies {
         Dependencies.androidX.navigationUi,
         Dependencies.epoxy.core,
         Dependencies.leakCanary,
-        Dependencies.chucker.core,
         Dependencies.androidX.activity,
         Dependencies.androidX.fragment,
         Dependencies.coroutines.core,
@@ -128,6 +128,8 @@ dependencies {
     ).forEach { dependency ->
         implementation(dependency)
     }
+
+    debugImplementation(Dependencies.chucker.core)
 
     arrayOf(
         Dependencies.leakSentry,
@@ -160,7 +162,7 @@ dependencies {
         Dependencies.Mockk.core,
         Dependencies.room.test,
         Dependencies.junitExt,
-        "androidx.arch.core:core-testing:2.1.0"
+        Dependencies.androidX.testCore
     ).forEach { dependency ->
         testImplementation(dependency)
     }

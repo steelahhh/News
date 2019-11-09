@@ -116,6 +116,7 @@ object Dependencies {
         const val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
         const val fragment = "androidx.fragment:fragment-ktx:1.1.0"
         const val activity = "androidx.activity:activity-ktx:1.0.0"
+        const val testCore = "androidx.arch.core:core-testing:2.1.0"
     }
 
     const val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:1.2.1"
