@@ -50,9 +50,12 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(
+        okHttpClient: dagger.Lazy<OkHttpClient>,
+        moshi: Moshi
+    ): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(okHttpClient)
+        .callFactory { okHttpClient.get().newCall(it) }
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
