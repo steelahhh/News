@@ -1,9 +1,11 @@
 package dev.steelahhh.news.features
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.steelahhh.news.core.Failure
+import dev.steelahhh.news.core.isUnitTest
 import dev.steelahhh.news.domain.Article
 import dev.steelahhh.news.domain.NewsRepository
 import javax.inject.Inject
@@ -20,10 +22,17 @@ class ArticlesViewModel @Inject constructor(
     private val _news = MutableLiveData<ArticlesListState>()
     private val _query = MutableLiveData<String>("bitcoin")
 
-    private var currentPage = 1
     private val currentQuery get() = _query.value.orEmpty()
 
+    var currentPage = 1
+        private set
+
     init {
+        if (!isUnitTest()) load()
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun load() {
         // Clear the loaded articles to keep the data up-to-date
         viewModelScope.launch { repository.clear() }
         news.value = ArticlesListState(isLoading = true)

@@ -33,8 +33,8 @@ object Versions {
     const val epoxy = "3.8.0"
 
     const val mockk = "1.9.3"
-    const val junit = "5.3.1"
-    const val testRunner = "1.1.1"
+    const val junit = "4.12"
+    const val testRunner = "1.2.0"
 }
 
 object Dependencies {
@@ -70,6 +70,7 @@ object Dependencies {
     object Coroutines {
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2"
     }
 
     val moshi = Moshi
@@ -126,15 +127,9 @@ object Dependencies {
 
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
 
-    object JUnit {
-        const val api = "org.junit.jupiter:junit-jupiter-api:${Versions.junit}"
-        const val engine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junit}"
-
-        object Android {
-            const val core = "de.mannodermaus.junit5:android-test-core:1.0.0"
-            const val runner = "de.mannodermaus.junit5:android-test-runner:1.0.0"
-        }
-    }
+    const val junit = "junit:junit:${vers.junit}"
+    const val junitExt = "androidx.test.ext:junit-ktx:1.1.1"
+    const val rules = "androidx.test:rules:1.1.0"
 
     object Mockk {
         const val core = "io.mockk:mockk:${Versions.mockk}"

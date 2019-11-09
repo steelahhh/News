@@ -15,11 +15,13 @@ data class ArticleUi(
 fun Article.toUi() = ArticleUi(
     title = title,
     info = listOf(author, source).joinToString(),
-    date = DateUtils.getRelativeTimeSpanString(
-        date.toEpochMilli(),
-        System.currentTimeMillis(),
-        0L
-    ).toString(),
+    date = date?.let {
+        DateUtils.getRelativeTimeSpanString(
+            date.toEpochMilli(),
+            System.currentTimeMillis(),
+            0L
+        ).toString()
+    }.orEmpty(),
     url = url,
     content = content,
     image = image

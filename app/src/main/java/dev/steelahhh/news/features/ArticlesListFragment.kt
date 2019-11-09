@@ -16,8 +16,8 @@ import dev.steelahhh.news.di.injector
 import dev.steelahhh.news.di.viewModel
 import dev.steelahhh.news.features.ArticlesListFragmentDirections.Companion.openArticleDetail
 import dev.steelahhh.news.features.ArticlesViewModel.Companion.PAGE_SIZE
-import kotlinx.android.synthetic.main.fragment_article_list.*
 import kotlin.math.abs
+import kotlinx.android.synthetic.main.fragment_article_list.*
 
 class ArticlesListFragment : Fragment() {
     private val vm by viewModel { injector.newsListViewModel }
@@ -39,7 +39,7 @@ class ArticlesListFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean = true.also {
                 query?.run(vm::onNewQuery)
             }
-        })}
+        }) }
 
     override fun onPause() {
         super.onPause()

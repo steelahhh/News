@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.dsl.TestOptions
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -39,6 +40,14 @@ android {
         versionName = Versions.appVersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "API_KEY", "\"${getProperty("local.properties", "API_KEY")}\"")
+    }
+    testOptions {
+        unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
+            isReturnDefaultValues = true
+        })
+    }
+    lintOptions {
+        error("VisibleForTests")
     }
     buildTypes {
         getByName("release") {
@@ -139,22 +148,20 @@ dependencies {
 
     arrayOf(
         Dependencies.testRunner,
-        Dependencies.JUnit.api,
-        Dependencies.Mockk.android,
-        Dependencies.JUnit.Android.core
+        Dependencies.junitExt,
+        Dependencies.rules,
+        Dependencies.Mockk.android
     ).forEach { dependency ->
         androidTestImplementation(dependency)
     }
     arrayOf(
+        Dependencies.junit,
+        Dependencies.coroutines.test,
         Dependencies.Mockk.core,
         Dependencies.room.test,
-        Dependencies.JUnit.api
+        Dependencies.junitExt,
+        "androidx.arch.core:core-testing:2.1.0"
     ).forEach { dependency ->
         testImplementation(dependency)
     }
-
-    testRuntimeOnly(Dependencies.JUnit.engine)
-
-    androidTestRuntimeOnly(Dependencies.JUnit.Android.runner)
-    androidTestRuntimeOnly(Dependencies.JUnit.engine)
 }

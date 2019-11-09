@@ -13,10 +13,12 @@ data class ArticlePreviewUi(
 fun Article.toPreviewUi() = ArticlePreviewUi(
     title = title,
     image = image,
-    date = DateUtils.getRelativeTimeSpanString(
-        date.toEpochMilli(),
-        System.currentTimeMillis(),
-        0L
-    ).toString(),
+    date = date?.let {
+        DateUtils.getRelativeTimeSpanString(
+            date.toEpochMilli(),
+            System.currentTimeMillis(),
+            0L
+        ).toString()
+    }.orEmpty(),
     description = description
 )
