@@ -9,7 +9,6 @@ To run the application from source, you should first provide the News API key vi
 
 ## Technologies used
 - Single activity 
-- Coroutines
 - airbnb/Epoxy for displaying items easily in RecyclerView 
 - Dagger2 for DI
 - Room 
